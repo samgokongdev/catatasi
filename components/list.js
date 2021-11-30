@@ -7,11 +7,11 @@ export default function List() {
           <span className="text-pinks text-xxs">Kiri</span>
           <span className="text-xs font-semibold tracking-tighter">90 ml</span>
         </div>
-        <div className="flex flex-col w-5/12">
+        <div className="flex flex-col w-6/12">
           <span className="text-pinks  text-xxs">Kanan</span>
           <span className="text-xs font-semibold tracking-tighter">100 ml</span>
         </div>
-        <div className=" items-center w-2/12">
+        <div className=" items-center w-1/12">
           <svg
             width="24"
             height="24"

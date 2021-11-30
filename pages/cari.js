@@ -1,4 +1,5 @@
 import Logo from "../components/svg/logo";
+import Link from "next/link";
 
 export default function Cari() {
   return (
@@ -45,6 +46,11 @@ export default function Cari() {
             </button>
           </div>
         </form>
+        <Link href="/menu">
+          <a className="flex items-center justify-center mt-3 w-full bg-pinks rounded-lg py-1.5 text-sm font-semibold text-pinkt tracking-widest">
+            Cancel
+          </a>
+        </Link>
       </div>
     </div>
   );

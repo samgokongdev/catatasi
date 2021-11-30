@@ -1,4 +1,4 @@
-import Logo from "../components/svg/logo";
+import Link from "next/link";
 
 export default function Catat() {
   return (
@@ -11,7 +11,7 @@ export default function Catat() {
           Produksi ASI
         </div>
         <div className="mt-5 text-pinkt font-light tracking-wider text-xs">
-          Tanggal 27 Oct 2021
+          Catat produksi ASI ibu melalui form di bawah
         </div>
         <form className="mt-5">
           <div className="grid grid-cols-2 gap-2">
@@ -28,8 +28,9 @@ export default function Catat() {
                     id="kiri"
                     name="kiri"
                     type="text"
+                    placeholder="Contoh : 80"
                     required
-                    className="w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
+                    className="w-full inline-block placeholder-pinks border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
                   />
                 </div>
               </div>
@@ -47,8 +48,9 @@ export default function Catat() {
                     id="kanan"
                     name="kanan"
                     type="text"
+                    placeholder="Contoh : 80"
                     required
-                    className="w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
+                    className="w-full inline-block placeholder-pinks border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
                   />
                 </div>
               </div>
@@ -68,9 +70,9 @@ export default function Catat() {
                   <input
                     id="kiri"
                     name="kiri"
-                    type="text"
+                    type="datetime-local"
                     required
-                    className="placeholder w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
+                    className="placeholder-pinks  w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
                     placeholder="Format : 00:00, Contoh 07:00"
                   />
                 </div>
@@ -87,6 +89,11 @@ export default function Catat() {
             </button>
           </div>
         </form>
+        <Link href="/">
+          <a className=" mt-2 flex justify-center items-center w-full bg-pinks rounded-lg py-1.5 text-sm font-semibold text-pinkt tracking-widest">
+            Cancel
+          </a>
+        </Link>
       </div>
     </div>
   );

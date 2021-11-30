@@ -1,6 +1,7 @@
 import Head from "next/head";
 import List from "../components/list";
 import Menubtn from "../components/svg/menubtn";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,7 +12,11 @@ export default function Home() {
       </Head>
       <div className="pt-6 text-pinkt">
         <div className="flex">
-          <Menubtn />
+          <Link href="/menu">
+            <a>
+              <Menubtn />
+            </a>
+          </Link>
         </div>
         <div className="pt-6 font-extrabold text-base tracking-wider">
           Halo Mega
@@ -36,9 +41,11 @@ export default function Home() {
               <span className="text-xs font-light tracking-wide w-8/12">
                 Produksi Hari Ini :
               </span>
-              <button className="text-xxs bg-pinkt text-putih py-1 px-2 items-end w-4/12 text-center rounded-xl">
-                Tambah
-              </button>
+              <Link href="catat">
+                <a className="text-xxs bg-pinkt text-putih py-1 px-2 items-end w-4/12 text-center rounded-xl">
+                  Tambah
+                </a>
+              </Link>
             </div>
             <div className="pt-5 divide-y divide-opacity-50 divide-pinks">
               <List />
