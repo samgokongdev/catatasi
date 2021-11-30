@@ -16,6 +16,7 @@ module.exports = {
       pinkt: "#641E42",
       putih: "#FFFFFF",
       pinks: "#C98DAC",
+      pinkss: "#DDA8C3",
     },
   },
   variants: {
