@@ -1,17 +1,30 @@
-import List from "../components/list";
-import Menubtn from "../components/svg/menubtn";
+import List from "../../components/list";
+import Menubtn from "../../components/svg/menubtn";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function Historis() {
+export async function getServerSideProps(context) {
+  const { tglPumping } = context.query;
+  const req = await fetch(
+    `https://catatasi-api-production.up.railway.app/produksis?${tglPumping}`
+  );
+  const dataPumping = await req.json();
+  return {
+    props: {
+      dataPumping,
+    },
+  };
+}
+
+export default function Historis(props) {
+  const { dataPumping } = props;
   return (
     <div className="mx-auto flex flex-col min-h-screen px-6 bg-pinkm">
       <div className="pt-6 text-pinkt">
-        <div className="flex">
-          <Menubtn />
-        </div>
         <div className="pt-6 font-extrabold text-base tracking-wider">
           Produksi ASI
         </div>
-        <div className="text-xs">Tanggal 27 November 2020</div>
+        <div className="text-xs"></div>
       </div>
       <div className="bg-putih text-pinkt w-full flex flex-col justify-center items-center h-auto rounded py-5 mt-3">
         <div className=" font-medium text-xs">Total Produksi</div>
@@ -27,12 +40,13 @@ export default function Historis() {
             </span>
           </div>
           <div className="pt-2 divide-y divide-opacity-50 divide-pinks">
-            <List />
-            <List />
-            <List />
-            <List />
-            <List />
-            <List />
+            {dataPumping.map((sss) => {
+              return (
+                <div key={sss.id}>
+                  <List {...sss} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

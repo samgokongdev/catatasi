@@ -1,15 +1,24 @@
-export default function List() {
+export default function List(sss) {
+  const tanggal = sss.tglPumping;
+  const event = new Date(tanggal).toISOString().split("T")[0];
+  const x = new Date(tanggal);
+  const tanggal2 = event;
+  console.log(x);
   return (
     <div className="py-1">
-      <div className="text-xxs">28/11/2021</div>
+      <div className="text-xxs">{tanggal2}</div>
       <div className="pt-2 flex w-full">
         <div className="flex flex-col w-5/12">
           <span className="text-pinks text-xxs">Kiri</span>
-          <span className="text-xs font-semibold tracking-tighter">90 ml</span>
+          <span className="text-xs font-semibold tracking-tighter">
+            {sss.kiri} ml
+          </span>
         </div>
         <div className="flex flex-col w-6/12">
           <span className="text-pinks  text-xxs">Kanan</span>
-          <span className="text-xs font-semibold tracking-tighter">100 ml</span>
+          <span className="text-xs font-semibold tracking-tighter">
+            {sss.kanan} ml
+          </span>
         </div>
         <div className=" items-center w-1/12">
           <svg

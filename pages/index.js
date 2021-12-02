@@ -2,8 +2,23 @@ import Head from "next/head";
 import List from "../components/list";
 import Menubtn from "../components/svg/menubtn";
 import Link from "next/link";
+import { useState } from "react";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const req = await fetch(
+    "https://catatasi-api-production.up.railway.app/produksis"
+  );
+  const dataPumping = await req.json();
+
+  return {
+    props: {
+      dataPumping,
+    },
+  };
+}
+
+export default function Home(props) {
+  const { dataPumping } = props;
   return (
     <div className="mx-auto flex flex-col min-h-screen px-6 bg-pinkm">
       <Head>
@@ -41,19 +56,20 @@ export default function Home() {
               <span className="text-xs font-light tracking-wide w-8/12">
                 Produksi Hari Ini :
               </span>
-              <Link href="catat">
+              <Link href="/catat">
                 <a className="text-xxs bg-pinkt text-putih py-1 px-2 items-end w-4/12 text-center rounded-xl">
                   Tambah
                 </a>
               </Link>
             </div>
             <div className="pt-5 divide-y divide-opacity-50 divide-pinks">
-              <List />
-              <List />
-              <List />
-              <List />
-              <List />
-              <List />
+              {dataPumping.map((sss) => {
+                return (
+                  <div key={sss.id}>
+                    <List {...sss} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
