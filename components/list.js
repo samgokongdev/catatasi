@@ -1,9 +1,10 @@
+import Link from "next/link";
+
 export default function List(sss) {
   const tanggal = sss.tglPumping;
   const event = new Date(tanggal).toISOString().split("T")[0];
   const x = new Date(tanggal);
   const tanggal2 = event;
-  console.log(x);
   return (
     <div className="py-1">
       <div className="text-xxs">{tanggal2}</div>
@@ -21,21 +22,25 @@ export default function List(sss) {
           </span>
         </div>
         <div className=" items-center w-1/12">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M24 8V24C24 25.4728 22.8061 26.6667 21.3333 26.6667H10.6667C9.1939 26.6667 7.99999 25.4728 7.99999 24V8M20 8V6.66667C20 5.19391 18.8061 4 17.3333 4H14.6667C13.1939 4 12 5.19391 12 6.66667V8M5.33333 8H26.6667M13.3333 13.3333V21.3333M18.6667 13.3333V21.3333"
-              stroke="#641E42"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Link href={"/delete/" + sss.id}>
+            <a>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24 8V24C24 25.4728 22.8061 26.6667 21.3333 26.6667H10.6667C9.1939 26.6667 7.99999 25.4728 7.99999 24V8M20 8V6.66667C20 5.19391 18.8061 4 17.3333 4H14.6667C13.1939 4 12 5.19391 12 6.66667V8M5.33333 8H26.6667M13.3333 13.3333V21.3333M18.6667 13.3333V21.3333"
+                  stroke="#641E42"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

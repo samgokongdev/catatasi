@@ -5,9 +5,7 @@ import Link from "next/link";
 
 export async function getServerSideProps(context) {
   const { tglPumping } = context.query;
-  const req = await fetch(
-    `https://catatasi-api-production.up.railway.app/produksis?${tglPumping}`
-  );
+  const req = await fetch(`${process.env.NEXT_PUBLIC_URL}/?${tglPumping}`);
   const dataPumping = await req.json();
   return {
     props: {
@@ -48,6 +46,11 @@ export default function Historis(props) {
               );
             })}
           </div>
+        </div>
+        <div className="mt-4 text-center bg-pinkt rounded py-2 text-putih font-medium text-xs">
+          <Link href="/">
+            <a>Dashboard</a>
+          </Link>
         </div>
       </div>
       <div className="text-xxs text-center py-5 text-pinkt">CatatanASI</div>

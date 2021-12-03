@@ -5,8 +5,12 @@ import Link from "next/link";
 import { useState } from "react";
 
 export async function getServerSideProps() {
+  const tgl = new Date();
+  const a = tgl.setHours(tgl.getHours() + 7);
+  const b = new Date(a).toISOString().split("T")[0];
+  console.log(b);
   const req = await fetch(
-    "https://catatasi-api-production.up.railway.app/produksis"
+    `${process.env.NEXT_PUBLIC_URL}/?tglPumping_gte=${b}`
   );
   const dataPumping = await req.json();
 
