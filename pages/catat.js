@@ -1,11 +1,30 @@
 import Link from "next/link";
 import { useState } from "react";
 import Router from "next/router";
+import nookies from "nookies";
 
-export default function Catat() {
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies.token) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
+
+export default function Catat(ctx) {
   const [kiri, setKiri] = useState("");
   const [kanan, setKanan] = useState("");
   const [tglPumping, setTglPumping] = useState("");
+  const a = nookies.get(ctx);
+  const user = a.user;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -14,18 +33,18 @@ export default function Catat() {
       kiri,
       kanan,
       tglPumping,
+      userPengguna: {
+        _id: user,
+      },
     };
 
-    const req = await fetch(
-      `https://catatasi-api-production.up.railway.app/produksis`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(field),
-      }
-    );
+    const req = await fetch(`${process.env.NEXT_PUBLIC_URL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(field),
+    });
 
     const res = await req.json();
     console.log(res);

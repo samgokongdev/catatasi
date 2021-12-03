@@ -4,8 +4,31 @@ import Contact from "../components/svg/contact";
 import Histori from "../components/svg/histori";
 import Logo from "../components/svg/logo";
 import Link from "next/link";
+import nookies from "nookies";
+import Router from "next/router";
 
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies.token) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 export default function Menu() {
+  function keluar() {
+    nookies.destroy(null, "token");
+    nookies.destroy(null, "user");
+    Router.replace("/login");
+  }
+
   return (
     <div className="mx-auto flex flex-col min-h-screen px-6 bg-pinkm">
       <div className="flex flex-col justify-center items-center h-screen">
@@ -57,7 +80,10 @@ export default function Menu() {
             </a>
           </Link>
 
-          <button className="col-span-2 bg-pinkt text-putih h-7 px-2 w-full text-center text-sm font-medium rounded-lg">
+          <button
+            onClick={keluar}
+            className="col-span-2 bg-pinkt text-putih h-7 px-2 w-full text-center text-sm font-medium rounded-lg"
+          >
             Logout
           </button>
           <Link href="/">

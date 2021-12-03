@@ -1,18 +1,48 @@
 import Logo from "../components/svg/logo";
+import { useState } from "react";
+import Router from "next/router";
 
 export default function Register() {
+  const [isian, setIsian] = useState({});
+  // const [berjalan, setBerjalan] = useState(false);
+  // const [berhasil, setBerhasil] = useState(false);
+  function setValue(e) {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    setIsian({
+      ...isian,
+      [name]: value,
+    });
+  }
+
+  async function doDaftar(e) {
+    e.preventDefault();
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_URL_AWAL}/auth/local/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(isian),
+      }
+    );
+    const res = await req.json();
+    if (res.jwt) {
+      Router.replace("/complete");
+    }
+  }
+
   return (
     <div className="flex flex-col px- bg-pinkm">
       <div className="flex flex-col justify-center px-10 h-screen">
         <div className="flex justify-center pb-8">
           <Logo />
         </div>
-        <form className="">
+        <form onSubmit={doDaftar} className="">
           <div>
-            <label
-              for="username"
-              className=" tracking-widest text-xs text-pinkt font-light antialiased"
-            >
+            <label className=" tracking-widest text-xs text-pinkt font-light antialiased">
               Username
             </label>
             <div className="mt-1">
@@ -21,15 +51,13 @@ export default function Register() {
                 name="username"
                 type="text"
                 required
+                onChange={setValue}
                 className="w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label
-              for="email"
-              className=" tracking-widest text-xs text-pinkt font-light antialiased"
-            >
+            <label className=" tracking-widest text-xs text-pinkt font-light antialiased">
               Email
             </label>
             <div className="mt-1">
@@ -38,15 +66,13 @@ export default function Register() {
                 name="email"
                 type="email"
                 required
+                onChange={setValue}
                 className="w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
               />
             </div>
           </div>
           <div>
-            <label
-              for="password"
-              className=" tracking-widest text-xs text-pinkt font-light antialiased"
-            >
+            <label className=" tracking-widest text-xs text-pinkt font-light antialiased">
               Password
             </label>
             <div className="mt-1">
@@ -55,6 +81,7 @@ export default function Register() {
                 name="password"
                 type="password"
                 required
+                onChange={setValue}
                 className="w-full border-pinkss rounded-lg px-3 py-2 text-xs text-pinkt focus:border-2 focus:outline-none"
               />
             </div>

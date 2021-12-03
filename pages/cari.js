@@ -2,6 +2,23 @@ import Logo from "../components/svg/logo";
 import Link from "next/link";
 import { useState } from "react";
 
+import nookies from "nookies";
+
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies.token) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 export default function Cari() {
   const [tglcari, setTglcari] = useState(new Date());
   let x = new Date(tglcari).toISOString().split("T")[0];
@@ -13,8 +30,8 @@ export default function Cari() {
   // const d = a.toISOString();
   // const tglcari3 = new Date(tglcari2.setDate(tglcari2.getDate() + 1));
   // console.log(a.toISOString().split("T")[0]);
-  console.log(c);
-  console.log(x);
+  // console.log(c);
+  // console.log(x);
   return (
     <div className="flex flex-col px- bg-pinkm">
       <div className="flex flex-col justify-center px-10 h-screen">

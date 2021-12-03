@@ -1,4 +1,5 @@
 import Logo from "../components/svg/logo";
+import Link from "next/link";
 
 export default function Complete() {
   return (
@@ -11,9 +12,11 @@ export default function Complete() {
           <div>Registrasi Berhasil !!</div>
         </div>
         <div className="text-pinkt font-bold flex justify-center">
-          <button className="w-1/2 mt-3 py-1 rounded-lg bg-pinkt text-putih">
-            Login
-          </button>
+          <Link href="/login">
+            <a className="w-1/2 mt-3 py-1 items-center text-center rounded-lg bg-pinkt text-putih">
+              Login
+            </a>
+          </Link>
         </div>
       </div>
     </div>

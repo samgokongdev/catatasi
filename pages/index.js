@@ -3,14 +3,25 @@ import List from "../components/list";
 import Menubtn from "../components/svg/menubtn";
 import Link from "next/link";
 import { useState } from "react";
+import nookies from "nookies";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies.token) {
+    return {
+      redirect: {
+        destination: "/login",
+      },
+    };
+  }
+
   const tgl = new Date();
   const a = tgl.setHours(tgl.getHours() + 7);
   const b = new Date(a).toISOString().split("T")[0];
-  console.log(b);
+  const user = cookies.user;
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/?tglPumping_gte=${b}`
+    `${process.env.NEXT_PUBLIC_URL}/?tglPumping_gte=${b}&userPengguna._id=${user}`
   );
   const dataPumping = await req.json();
 
@@ -23,6 +34,9 @@ export async function getServerSideProps() {
 
 export default function Home(props) {
   const { dataPumping } = props;
+  const xxxx = dataPumping.map((item) => item.kiri).reduce((a, b) => a + b, 0);
+  const yyyy = dataPumping.map((item) => item.kanan).reduce((a, b) => a + b, 0);
+  const zzzz = xxxx + yyyy;
   return (
     <div className="mx-auto flex flex-col min-h-screen px-6 bg-pinkm">
       <Head>
@@ -49,7 +63,7 @@ export default function Home(props) {
             <div className="text-xs font-semibold tracking-wider">
               Total Produksi ASI Hari ini
             </div>
-            <div className="text-lg font-bold tracking-tighter">1500 ml</div>
+            <div className="text-lg font-bold tracking-tighter">{zzzz} ml</div>
           </div>
         </section>
 
