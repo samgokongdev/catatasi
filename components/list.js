@@ -2,12 +2,16 @@ import Link from "next/link";
 
 export default function List(sss) {
   const tanggal = sss.tglPumping;
-  const event = new Date(tanggal).toISOString().split("T")[0];
-  const x = new Date(tanggal);
-  const tanggal2 = event;
+  const event = new Date(tanggal).toISOString();
+  const x = new Date(tanggal).toISOString().substr(11, 5);
+  const dd = new Date(tanggal).toISOString().substr(8, 2);
+  const mm = new Date(tanggal).toISOString().substr(5, 2);
+  const yy = new Date(tanggal).toISOString().substr(0, 4);
   return (
     <div className="py-1">
-      <div className="text-xxs">{tanggal2}</div>
+      <div className="text-xxs">
+        Tanggal {dd}/{mm}/{yy} (Pukul : {x})
+      </div>
       <div className="pt-2 flex w-full">
         <div className="flex flex-col w-5/12">
           <span className="text-pinks text-xxs">Kiri</span>
