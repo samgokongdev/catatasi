@@ -52,7 +52,7 @@ export default function Home(props) {
           </Link>
         </div>
         <div className="pt-6 font-extrabold text-base tracking-wider">
-          Halo Mega
+          Halo Bunda
         </div>
         <div className="text-xs">Selamat Datang di Aplikasi CatatanASI</div>
       </div>
